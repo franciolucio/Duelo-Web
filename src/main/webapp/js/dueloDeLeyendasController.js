@@ -28,3 +28,15 @@ dueloApp.controller('PersonajesController', function ($scope, $timeout, $http, P
         }, 3000);
     }
 });
+
+dueloApp.config(['$routeProvider',
+                 function($routeProvider) {
+                   $routeProvider.
+                     when('/', {
+                       templateUrl: '../src/main/webapp/login.html',
+                       controller: 'DueloDeLeyendasController'
+                     }).
+                     otherwise({
+                       redirectTo: '/'
+                     });
+});

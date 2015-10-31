@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import juego.DatosDelJuego;
+import juego.Personaje;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -29,8 +30,8 @@ public class DueloDeLeyendasController extends ResultFactory {
   public Result personajes(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
     Result _xblockexpression = null;
     {
-      List<String> _dasLasInstancias = DatosDelJuego.instance.todasLasInstancias();
-      final String[] personajes = ((String[])Conversions.unwrapArray(_dasLasInstancias, String.class)).clone();
+      List<Personaje> _dasLasInstancias = DatosDelJuego.instance.todasLasInstancias();
+      final Personaje[] personajes = ((Personaje[])Conversions.unwrapArray(_dasLasInstancias, Personaje.class)).clone();
       response.setContentType(ContentType.APPLICATION_JSON);
       String _json = this._jSONUtils.toJson(personajes);
       _xblockexpression = ResultFactory.ok(_json);
