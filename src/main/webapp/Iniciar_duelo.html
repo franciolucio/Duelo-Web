@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html ng-app="dueloDeLeyendasApp">
+<head>
+
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="js/app.js"></script>  
+  <script src="js/service.js"></script>  
+  <script src="js/dueloDeLeyendasController.js"></script>  
+  <script src="js/jquery-1-1-13.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/custom.js"></script>
+  <link rel="stylesheet" href="css/bootstrap-theme.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link href="images/icono.ico" type = "image/x-icon" rel="shortcut icon"/>
+
+  <title>
+      Duelo de Leyendas!
+  </title>
+</head>
+
+<body ng-controller="DueloDeLeyendasController as dueloDeLeyendas" class="container" style="border:black 2px solid;margin-top:15px">
+
+	<h1 class="titulo margenes" style="background:black">
+		Selecciona tu personaje para el duelo!
+	</h1>
+
+	<div class="row">
+  		
+    <div class="col-md-4" ng-model="dueloDeLeyendas.id">
+  		  
+      <div class="col-md-6" style="padding-left:80px;padding-right:0px"> 
+        <div ng-repeat="personaje in personajes | orderBy: 'id' | limitTo:4">  
+          <button type="submit" class="sinMargenes">
+            <img ng-src="{{personaje.imagenSrc}}" class="estiloDeImagen" ng-click= "seleccionarPersonaje(personaje)">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-6" style="padding-left:50px">
+        <div ng-repeat="personaje in personajes | orderBy: '-id' | limitTo:4">
+          <button type="submit" class="sinMargenes">
+            <img ng-src="{{personaje.imagenSrc}}" class="estiloDeImagen" ng-click= "seleccionarPersonaje(personaje)">
+          </button>
+        </div>
+      </div>
+  	</div>
+  
+    <div class="col-md-4" style="padding-left:0px">
+      <h4 class="margenes2 titulo" style="background:black;text-transform:uppercase">
+        {{personajeSeleccionado.nombre}}
+      </h4>
+      <img ng-src={{personajeSeleccionado.imagenSrc}} style="width:100%;height:480px">
+    </div>
+
+    <div class="col-md-4" style="padding-right:100px">
+
+      <div style="margin-bottom:0px;margin-top:0px">
+
+        <h5 class="estadiscaticas">Especialidades:</h5>
+  		  <h6 class="estadiscaticas" style="text-align:right">{{personajeSeleccionado.especialidades}}</h6>
+        <h5 class="estadiscaticas">Debilidad:</h5>
+        <h6 class="estadiscaticas" style="text-align:right">{{personajeSeleccionado.debilidades}}</h6>
+        <h5 class="estadiscaticas">Mejor Posici&#243n:</h5>
+        <h6 class="estadiscaticas" style="text-align:right">{{personajeSeleccionado.mejorPosicion}}</h6>
+        
+        <h4 style="color:blue;text-align:center">Jugar!</h4>
+
+        <div ng-repeat="posicion in posicionesDuelos">
+        
+          <a href="Ganaste.html">
+            <button type="button" class="btn btn-primary btn-block" style="margin-top: 5px"> 
+              {{posicion.nombre}}
+            </button>
+          </a>
+        </div>
+
+        <hr>
+
+        <h4 style="color:blue;text-align:center">Stats</h4>
+
+        <table style="width:100%" style="background-color: blue">
+          <tr>
+           <td class="estadiscaticas">Jugadas</td>
+           <td class="estadiscaticas" style="text-align:right">{{personajeSeleccionado.estadiscaticas[0]}}</td>
+          </tr>
+          <tr>
+           <td class="estadiscaticas">Ganadas</td>
+           <td class="estadiscaticas" style="text-align:right">{{personajeSeleccionado.estadiscaticas[1]}}</td>
+          </tr>
+          <tr>
+           <td class="estadiscaticas">Kills</td>
+           <td class="estadiscaticas" style="text-align:right">{{personajeSeleccionado.estadiscaticas[2]}}</td> 
+          </tr>
+          <tr>
+           <td class="estadiscaticas">Deads</td>
+           <td class="estadiscaticas" style="text-align:right">{{personajeSeleccionado.estadiscaticas[3]}}</td> 
+          </tr>
+          <tr>
+           <td class="estadiscaticas">Assists</td>
+           <td class="estadiscaticas" style="text-align:right">{{personajeSeleccionado.estadiscaticas[4]}}</td> 
+          </tr>
+          <tr>
+           <td class="estadiscaticas">Mejor Ubicaci&#243n</td>
+           <td class="estadiscaticas" style="text-align:right">{{personajeSeleccionado.estadiscaticas[5]}}</td> 
+          </tr>
+          <tr>
+           <td class="estadiscaticas">Puntaje</td>
+           <td class="estadiscaticas" style="text-align:right">{{personajeSeleccionado.estadiscaticas[6]}}</td>
+          </tr>
+        </table>
+            
+        <hr>            		  
+      </div> 
+    </div>
+	</div>
+</body>
+</html>
