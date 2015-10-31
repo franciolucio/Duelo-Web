@@ -1,30 +1,30 @@
-dueloApp.controller('DueloDeLeyendasController',`['DueloService', '$scope', function(DueloService, $scope){
-    
-    DueloService.loggedIn = true;
-    $scope.personajeSeleccionado = {};
+'use strict';
 
-    $scope.seleccionarPersonaje = function(personaje) {          
-        $scope.personajeSeleccionado = personaje;
+var dueloApp = angular.module('dueloApp', ['ngRoute']);
+
+dueloApp.factory('PersonajesRest', function($http) {
+    return function(errorHandler) {
+        this.findAll = function(callback) {
+            $http.get('/personajes').success(callback).error(errorHandler);
+        }
     }
-  }
-]);
+});
 
-
-
-
-dueloApp.controller('DueloLoginCtrl',`['DueloService', '$scope', function(DueloService, $scope){
-
-}]);
-
-
-dueloApp.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-      when('/', {
-        templateUrl: '../src/main/webapp/login.html',
-        controller: 'DueloLoginCtrl'
-      }).
-      otherwise({
-        redirectTo: '/'
-      });
-}]);
+dueloApp.controller('PersonajesController', function ($scope, $timeout, $http, PersonajesRest) {
+    var personajes = new PersonajesRest(function(data, status) { 
+        if (data.error) {
+            $scope.notificarError("Error: " + data.error);
+        }
+        else {
+            $scope.notificarError(status + ": " + data);
+        }
+    });
+    
+    $scope.errors = [];
+    $scope.notificarError = function(mensaje) {
+        $scope.errors.push(mensaje);
+        $timeout(function(){
+            while($scope.errors.length > 0) $scope.errors.pop();
+        }, 3000);
+    }
+});
