@@ -1,23 +1,19 @@
-<html ng-app="DueloDeLeyendasApp">
-<head>
-  
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../src/main/webapp/css/custom.css">
-  <link href="images/icono.ico" type = "image/x-icon" rel="shortcut icon"/>
-  <script src="node_modules/angular-route/angular-route.js"></script>
-   <script src="node_modules/angular/angular.min.js"></script>
-  
-  <title>
-      Duelo de Leyendas !
-  </title>
-  </head>
-
-<body class="container">
-
-  <div ng-view></div>
-
-</body>
+<!doctype html>
+<html lang="es" >
+    <head>
+      	<meta charset= "UTF-8">
+    	<title>Duelo de Leyendas!</title>
+      	<script src="node_modules/angular/angular.js"></script>
+    	<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    	<link rel="stylesheet" href="custom.css">
+    	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+		<link href="images/icono.ico" type = "image/x-icon" rel="shortcut icon"/>
+		<script src="app.js"></script>
+  	</head>
+    
+    <body data-ng-app="dueloApp">
+    	<div data-ui-view></div>
+    </body>
 </html>

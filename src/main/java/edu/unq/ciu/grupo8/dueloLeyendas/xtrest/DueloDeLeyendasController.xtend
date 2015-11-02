@@ -12,15 +12,22 @@ import org.uqbar.xtrest.json.JSONUtils
 class DueloDeLeyendasController {
 	extension JSONUtils = new JSONUtils
 	
-	@Get("/personajes")
-	def Result personajes() {
-    	val personajes = DatosDelJuego.instance.todasLasInstancias.clone
-    	
-		response.contentType = ContentType.APPLICATION_JSON
-		ok(personajes.toJson)
+	@Get("/posiciones")
+	def Result posiciones() {
+    	val posiciones = DatosDelJuego.instance.todasLasInstancias.clone
+    	response.contentType = ContentType.APPLICATION_JSON
+		ok(posiciones.toJson)
 	}
 	
+	/* @Post("/login")
+	def Result login() {
+		val s = "Hola"
+		response.contentType = ContentType.APPLICATION_JSON
+		ok(s.toJson)
+	}*/
+	
+	
 	def static void main(String[] args) {
-		XTRest.start(DueloDeLeyendasController, 9000)
+		XTRest.start(DueloDeLeyendasController, 7000)
 	}
 }

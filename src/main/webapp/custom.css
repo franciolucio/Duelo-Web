@@ -2,12 +2,6 @@ body{
 	background-size: cover;
 }
 
-hr{
-  border-width:2px; 
-  border-style:dotted;
-  border-color:black;
-}
-
 .box{
 	text-align: center;
 	padding: 15px;
@@ -20,7 +14,7 @@ hr{
 }
 
 .titulo{
-	color: #fff;
+	color: blue;
 	background: transparent;
 	text-align:center;
   padding:25px;

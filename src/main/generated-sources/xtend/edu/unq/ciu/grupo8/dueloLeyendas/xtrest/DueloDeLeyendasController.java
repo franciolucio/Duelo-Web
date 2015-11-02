@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import juego.DatosDelJuego;
-import juego.Personaje;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -19,6 +18,7 @@ import org.uqbar.xtrest.api.annotation.Get;
 import org.uqbar.xtrest.http.ContentType;
 import org.uqbar.xtrest.json.JSONUtils;
 import org.uqbar.xtrest.result.ResultFactory;
+import posicion.Posicion;
 
 @Controller
 @SuppressWarnings("all")
@@ -26,34 +26,42 @@ public class DueloDeLeyendasController extends ResultFactory {
   @Extension
   private JSONUtils _jSONUtils = new JSONUtils();
   
-  @Get("/personajes")
-  public Result personajes(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+  @Get("/posiciones")
+  public Result posiciones(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
     Result _xblockexpression = null;
     {
-      List<Personaje> _dasLasInstancias = DatosDelJuego.instance.todasLasInstancias();
-      final Personaje[] personajes = ((Personaje[])Conversions.unwrapArray(_dasLasInstancias, Personaje.class)).clone();
+      List<Posicion> _dasLasInstancias = DatosDelJuego.instance.todasLasInstancias();
+      final Posicion[] posiciones = ((Posicion[])Conversions.unwrapArray(_dasLasInstancias, Posicion.class)).clone();
       response.setContentType(ContentType.APPLICATION_JSON);
-      String _json = this._jSONUtils.toJson(personajes);
+      String _json = this._jSONUtils.toJson(posiciones);
       _xblockexpression = ResultFactory.ok(_json);
     }
     return _xblockexpression;
   }
   
+  /**
+   * @Post("/login")
+   * def Result login() {
+   * val s = "Hola"
+   * response.contentType = ContentType.APPLICATION_JSON
+   * ok(s.toJson)
+   * }
+   */
   public static void main(final String[] args) {
-    XTRest.start(DueloDeLeyendasController.class, 9000);
+    XTRest.start(DueloDeLeyendasController.class, 7000);
   }
   
   public void handle(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) throws IOException, ServletException {
     {
     	Matcher matcher = 
-    		Pattern.compile("/personajes").matcher(target);
+    		Pattern.compile("/posiciones").matcher(target);
     	if (request.getMethod().equalsIgnoreCase("Get") && matcher.matches()) {
     		// take parameters from request
     		
     		// take variables from url
     		
     		
-    	    Result result = personajes(target, baseRequest, request, response);
+    	    Result result = posiciones(target, baseRequest, request, response);
     	    result.process(response);
     	    
     		response.addHeader("Access-Control-Allow-Origin", "*");
@@ -75,7 +83,7 @@ public class DueloDeLeyendasController extends ResultFactory {
     	+ "		<tbody>"
     	+ "			<tr>"
     	+ "				<td>GET</td>"
-    	+ "				<td>/personajes</td>"
+    	+ "				<td>/posiciones</td>"
     	+ "				<td></td>"
     	+ "			</tr>"
     	+ "		</tbody>"
